@@ -45,8 +45,9 @@ class LocalStorageService {
     _saveToDisk(userNameLiteral, userName);
   }
 
-  void getTheme() {
+  String getTheme() {
     _theme.value = _getFromDisk(themeLiteral) ?? 'system';
+    return _theme.value;
   }
 
   ValueNotifier<String> get themeNotifier => _theme;

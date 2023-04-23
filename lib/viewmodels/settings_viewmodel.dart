@@ -3,7 +3,7 @@ import 'package:nearby_chat/locator.dart';
 import 'package:nearby_chat/models/snackbar_model.dart';
 import 'package:nearby_chat/services/local_storage_service.dart';
 import 'package:nearby_chat/services/snackbar_service.dart';
-import 'package:nearby_chat/utils/log.dart';
+import 'package:nearby_chat/services/log_service.dart';
 import 'package:nearby_chat/viewmodels/base_viewmodel.dart';
 
 class SettingsViewModel extends BaseModel {

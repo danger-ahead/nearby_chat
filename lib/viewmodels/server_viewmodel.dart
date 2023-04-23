@@ -7,7 +7,7 @@ import 'package:nearby_chat/services/local_storage_service.dart';
 import 'package:nearby_chat/ui/components/chat_bubble.dart';
 import 'package:nearby_chat/utils/constant.dart';
 import 'package:nearby_chat/utils/create_json_string.dart';
-import 'package:nearby_chat/utils/log.dart';
+import 'package:nearby_chat/services/log_service.dart';
 import 'package:nearby_chat/viewmodels/base_viewmodel.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 

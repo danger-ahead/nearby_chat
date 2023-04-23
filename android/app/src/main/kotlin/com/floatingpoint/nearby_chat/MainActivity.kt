@@ -1,4 +1,4 @@
-package com.example.nearby_chat
+package com.floatingpoint.nearbychat
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: BaseView<HomeViewModel>(
-          onModelReady: (model) => _model = model,
+          onModelReady: (model) => {_model = model, _model.getUsername()},
           builder: (context, model, child) => Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

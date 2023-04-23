@@ -93,16 +93,32 @@ class ThemeSwitchButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: ElevatedButton(
           style: ButtonStyle(
+            side: MaterialStateBorderSide.resolveWith(
+              (states) => const BorderSide(
+                color: NearbyChatTheme.primaryColorDark,
+              ),
+            ),
             backgroundColor: MaterialStateProperty.all(_model.theme == theme
                 ? NearbyChatTheme.primaryColorDark
                 : NearbyChatTheme.secondaryColor),
           ),
           onPressed: () => _model.setTheme(theme),
-          child: theme == 'system'
-              ? const Icon(Icons.phone_android)
-              : theme == 'light'
-                  ? const Icon(Icons.wb_sunny)
-                  : const Icon(Icons.nightlight_round),
+          child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    theme.toUpperCase(),
+                    textScaleFactor: 0.9,
+                  ),
+                  theme == 'system'
+                      ? const Icon(Icons.phone_android, size: 18)
+                      : theme == 'light'
+                          ? const Icon(Icons.wb_sunny, size: 18)
+                          : const Icon(Icons.nightlight_round, size: 18),
+                ],
+              )),
         ),
       ),
     );

@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:nearby_chat/services/dialog_service.dart';
 import 'package:nearby_chat/services/local_storage_service.dart';
 import 'package:nearby_chat/services/snackbar_service.dart';
-import 'package:nearby_chat/utils/log.dart';
+import 'package:nearby_chat/services/log_service.dart';
 import 'package:nearby_chat/viewmodels/chat_bubble_viewmodel.dart';
 import 'package:nearby_chat/viewmodels/client_viewmodel.dart';
 import 'package:nearby_chat/viewmodels/home_viewmodel.dart';

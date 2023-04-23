@@ -9,7 +9,8 @@ class InputField extends StatefulWidget {
       this.actionWidget,
       this.action,
       required this.hintText,
-      this.actionIconColor = NearbyChatTheme.primaryColor})
+      this.actionIconColor = NearbyChatTheme.primaryColor,
+      this.keyboardType = TextInputType.text})
       : super(key: key);
 
   final TextEditingController textController;
@@ -18,6 +19,7 @@ class InputField extends StatefulWidget {
   final Function()? action;
   final String hintText;
   final Widget? actionWidget;
+  final TextInputType? keyboardType;
 
   @override
   State<InputField> createState() => _InputFieldState();
@@ -50,6 +52,7 @@ class _InputFieldState extends State<InputField> {
         Expanded(
           child: TextField(
             autofocus: true,
+            keyboardType: widget.keyboardType,
             controller: widget.textController,
             decoration: InputDecoration(
               isDense: true,

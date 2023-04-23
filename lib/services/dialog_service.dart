@@ -117,31 +117,35 @@ class DialogService {
 
   void _showInputDialog(DialogRequest request) {
     TextEditingController textController = TextEditingController();
-    Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        title: Text(
-          request.title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.dialog(
+        AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
-        ),
-        content: InputField(
-            textController: textController,
-            hintText: request.description ?? ''),
-        actions: <Widget>[
-          PrimaryButton(
-            onPressed: () {
-              dialogComplete(
-                  DialogResponse(confirmed: true, value: textController.text));
-            },
-            buttonTitle: request.buttonTitle!,
+          title: Text(
+            request.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ],
-      ),
-    );
+          content: InputField(
+              textController: textController,
+              keyboardType: request.keyboardType,
+              hintText: request.description ?? ''),
+          actions: <Widget>[
+            PrimaryButton(
+              onPressed: () {
+                dialogComplete(DialogResponse(
+                    confirmed: true, value: textController.text));
+              },
+              buttonTitle: request.buttonTitle!,
+            ),
+          ],
+        ),
+        barrierDismissible: request.isDismissible!,
+      );
+    });
   }
 
   /// Calls the dialog listener and returns a Future that will wait for dialogComplete.
@@ -167,6 +171,8 @@ class DialogService {
     String? title,
     String? description,
     String confirmationTitle = 'Continue',
+    bool? isDismissible = true,
+    TextInputType? keyboardType = TextInputType.text,
   }) {
     _dialogCompleter = Completer<DialogResponse>();
     title ??= 'Title';
@@ -175,6 +181,8 @@ class DialogService {
         title: title,
         description: description,
         buttonTitle: confirmationTitle,
+        isDismissible: isDismissible,
+        keyboardType: keyboardType,
       ),
     );
     return _dialogCompleter!.future;
