@@ -8,7 +8,7 @@ class LocalStorageService {
   static const String userNameLiteral = 'username';
   static const String themeLiteral = 'theme';
 
-  final ValueNotifier<String> _theme = ValueNotifier<String>('');
+  final ValueNotifier<int> _theme = ValueNotifier<int>(0);
 
   static Future<LocalStorageService> getInstance() async {
     _preferences ??= await SharedPreferences.getInstance();
@@ -45,14 +45,14 @@ class LocalStorageService {
     _saveToDisk(userNameLiteral, userName);
   }
 
-  String getTheme() {
-    _theme.value = _getFromDisk(themeLiteral) ?? 'system';
+  int getTheme() {
+    _theme.value = _getFromDisk(themeLiteral) ?? 0;
     return _theme.value;
   }
 
-  ValueNotifier<String> get themeNotifier => _theme;
+  ValueNotifier<int> get themeNotifier => _theme;
 
-  set theme(String theme) {
+  set theme(int theme) {
     _theme.value = theme;
     _saveToDisk(themeLiteral, theme);
   }

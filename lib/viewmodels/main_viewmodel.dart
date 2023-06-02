@@ -6,9 +6,9 @@ import 'package:nearby_chat/viewmodels/base_viewmodel.dart';
 class MainViewModel extends BaseModel {
   final _log = locator<Log>();
   final _localStorageService = locator<LocalStorageService>();
-  String _theme = '';
+  int _theme = 0;
 
-  String get theme => _theme;
+  int get theme => _theme;
 
   void initState() {
     _theme = _localStorageService.getTheme();

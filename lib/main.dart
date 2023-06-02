@@ -63,9 +63,9 @@ class _NearbyChatAppState extends State<NearbyChatApp> {
                   cursorColor: NearbyChatTheme.primaryColor,
                 ),
               ),
-              themeMode: _model.theme == 'light'
+              themeMode: _model.theme == 1
                   ? ThemeMode.light
-                  : _model.theme == 'dark'
+                  : _model.theme == 2
                       ? ThemeMode.dark
                       : ThemeMode.system,
               home: const Home(),

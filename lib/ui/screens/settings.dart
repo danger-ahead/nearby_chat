@@ -3,6 +3,7 @@ import 'package:nearby_chat/nearbychat_theme.dart';
 import 'package:nearby_chat/ui/base_view.dart';
 import 'package:nearby_chat/ui/components/input_field.dart';
 import 'package:nearby_chat/viewmodels/settings_viewmodel.dart';
+import 'package:simple_chips_input/select_chips_input.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -62,65 +63,57 @@ class _SettingsState extends State<Settings> {
                       padding: EdgeInsets.only(top: 16.0, bottom: 8.0),
                       child: Text('Theme'),
                     ),
-                    Row(
-                      children: [
-                        ThemeSwitchButton(model: _model, theme: 'system'),
-                        ThemeSwitchButton(model: _model, theme: 'dark'),
-                        ThemeSwitchButton(model: _model, theme: 'light'),
+                    SelectChipsInput(
+                      onlyOneChipSelectable: true,
+                      chipsText: const [
+                        'System',
+                        'Light',
+                        'Dark',
                       ],
+                      preSelectedChips: [_model.theme ?? 0],
+                      widgetContainerDecoration: const BoxDecoration(
+                        color: NearbyChatTheme.secondaryColor,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4.0),
+                        ),
+                      ),
+                      selectedChipDecoration: const BoxDecoration(
+                          color: NearbyChatTheme.primaryColorDark),
+                      unselectedChipDecoration:
+                          const BoxDecoration(color: NearbyChatTheme.lightGrey),
+                      prefixIcons: const [
+                        Padding(
+                          padding: EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.phone_android,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.sunny,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: 8.0),
+                          child: Icon(
+                            Icons.nightlight,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                      wrapCrossAlignment: WrapCrossAlignment.center,
+                      wrapAlignment: WrapAlignment.center,
+                      wrapRunAlignment: WrapAlignment.center,
+                      onTap: (data, index) {
+                        _model.setTheme(index);
+                      },
                     )
                   ],
                 ),
               )),
-    );
-  }
-}
-
-class ThemeSwitchButton extends StatelessWidget {
-  const ThemeSwitchButton({
-    super.key,
-    required SettingsViewModel model,
-    required this.theme,
-  }) : _model = model;
-
-  final SettingsViewModel _model;
-  final String theme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: ElevatedButton(
-          style: ButtonStyle(
-            side: MaterialStateBorderSide.resolveWith(
-              (states) => const BorderSide(
-                color: NearbyChatTheme.primaryColorDark,
-              ),
-            ),
-            backgroundColor: MaterialStateProperty.all(_model.theme == theme
-                ? NearbyChatTheme.primaryColorDark
-                : NearbyChatTheme.secondaryColor),
-          ),
-          onPressed: () => _model.setTheme(theme),
-          child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    theme.toUpperCase(),
-                    textScaleFactor: 0.9,
-                  ),
-                  theme == 'system'
-                      ? const Icon(Icons.phone_android, size: 18)
-                      : theme == 'light'
-                          ? const Icon(Icons.wb_sunny, size: 18)
-                          : const Icon(Icons.nightlight_round, size: 18),
-                ],
-              )),
-        ),
-      ),
     );
   }
 }

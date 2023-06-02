@@ -20,12 +20,12 @@ class SettingsViewModel extends BaseModel {
     _log.info('username updated to "$name"');
   }
 
-  void setTheme(String theme) {
-    _localStorageService.theme = theme;
+  void setTheme(int themeIndex) {
+    _localStorageService.theme = themeIndex;
     _log.info('theme updated to "$theme"');
     notifyListeners();
   }
 
   String? get username => _localStorageService.username;
-  String? get theme => _localStorageService.themeNotifier.value;
+  int? get theme => _localStorageService.themeNotifier.value;
 }
